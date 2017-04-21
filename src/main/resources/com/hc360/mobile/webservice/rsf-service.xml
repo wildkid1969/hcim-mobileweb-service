@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rsf xmlns="http://code.hc360.com/schema/rsf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:rsf="http://code.hc360.com/schema/rsf">
+
+	<rsf:registry host="register.org.hc360.com" ></rsf:registry>
+	<rsf:service displayName="接收推送活动服务" owner="孟亚" department="移动事业部"
+		interfaceClass="com.hc360.mobile.webservice.service.MobileWxRsfService"
+		class="com.hc360.mobile.webservice.service.MobileWxRsfServiceImpl" portalId="mobilewxmodelmsg">
+		<rsf:document>
+		<![CDATA[
+			接收消息
+			map中添加的参数有
+			@ type 1 新订单  2 询盘宝  3 标王 4 周报  5 预约提醒 6 支付成功 7 验证码8留言
+			@ username  需要发送的用户名
+			@ title 摘要
+			@ k1 模板中的第1个参数  验证码
+			@ k2 模板中的第2个参数 时间
+			@ k3 模板中的第3个参数
+			@ k4 模板中的第4个参数
+			@ k5 模板中的第5个参数
+			@ k6 模板中的第6个参数
+			public String sendWxModelMsg(Map<String,String> map) throws Exception;
+		]]>
+		</rsf:document>
+	</rsf:service>
+
+</rsf> 

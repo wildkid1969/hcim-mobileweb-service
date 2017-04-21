@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<rsf xmlns="http://code.hc360.com/schema/rsf"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:rsf="http://code.hc360.com/schema/rsf">
+	
+	<rsf:client id="clientUserServiceImpl" displayName="lixin" owner="李信"
+			department="mobiledepartment"
+			interfaceClass="com.hc360.rsf.my.service.RSFMyMobileService" url="" portalId="mobileservice">
+	</rsf:client>
+	
+	<rsf:client id="KVDBbcServicea" displayName="sunzhongxing" owner="孙中兴"
+			department="mobiledepartment"
+			interfaceClass="com.hc360.rsf.kvdb.service.KVDBbcService" url="" portalId="mobileservice">
+	</rsf:client>	
+	
+	<rsf:client id="RsfOneKeyRepeatedService" displayName="lixin" owner="李信"
+			department="mobiledepartment"
+			interfaceClass="com.hc360.rsf.my.service.RsfOneKeyRepeatedService" url="" portalId="mobileservice">
+	</rsf:client>
+	
+	<rsf:client id="busNote" displayName="买家留言" owner="许强" department="MMT开发部"
+		interfaceClass="com.hc360.rsf.manage.RSFBusNoteService"  portalId="manage" timeout= "5000">
+	</rsf:client>
+</rsf>

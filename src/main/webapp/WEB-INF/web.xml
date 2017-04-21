@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+    <display-name>Hcim MobileWeb Servicee</display-name>
+    <context-param>
+        <param-name>configuration</param-name>
+        <param-value>deployment</param-value>
+    </context-param>
+    
+    <!-- 区分项目名称，防止默认重名 -->  
+    <context-param>  
+        <param-name>webAppRootKey</param-name>  
+        <param-value>MobileWeb.root</param-value>  
+    </context-param>  
+    
+      <!-- 防止 XSS 攻击 -->
+  	<filter>
+        <filter-name>XssFilter</filter-name>
+        <filter-class>com.hc360.mobileweb.filter.XssFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>XssFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:com/hc360/im/common/db/dataSource.xml
+            classpath:com/hc360/im/common/db/jdbcTemplate.xml
+            classpath:com/hc360/im/common/db/confForWar.xml
+        </param-value>
+    </context-param>
+
+    <servlet>
+    	<servlet-name>jms</servlet-name>
+    	<servlet-class>com.hc360.mobile.webservice.service.JMSService</servlet-class>
+    	<load-on-startup>4</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+	      <param-name>contextConfigLocation</param-name>
+	      <param-value>classpath:com/hc360/mobile/webservice/applicationContext.xml</param-value>
+	    </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.html</url-pattern>
+	</servlet-mapping> 
+            
+	<listener>
+		<listener-class>com.hc360.rsf.config.RsfListener</listener-class>
+	</listener> 
+    <context-param>
+		<param-name>rsfConfigFilePaths</param-name>
+		<param-value>
+			classpath:com/hc360/mobile/webservice/rsf.xml,
+			classpath:com/hc360/mobile/webservice/rsf-service.xml
+		</param-value>
+	</context-param>
+  <!-- 编码 -->
+  <filter>
+	<filter-name>encodingFilter</filter-name>
+	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	<!-- 设置编码格式 -->
+	<init-param>
+		<param-name>encoding</param-name>
+		<param-value>UTF-8</param-value>
+	</init-param>
+	<!-- 是否允许设置的encoding 覆盖request和response中已经存在的encodings -->
+	<init-param>
+		<param-name>forceEncoding</param-name>
+		<param-value>true</param-value>
+	</init-param>
+  </filter>
+  <filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+  </filter-mapping>
+</web-app>
